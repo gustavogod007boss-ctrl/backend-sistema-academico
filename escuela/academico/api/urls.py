@@ -1,11 +1,13 @@
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from academico.api.views import (
-    CarreraViewSet, AlumnoViewSet, MateriaViewSet, InscripcionViewSet, 
-    )
+from .views import CarreraViewSet, AlumnoViewSet, MateriaViewSet, InscripcionViewSet
 
 router = DefaultRouter()
-router.register('carreras', CarreraViewSet, basename='carrera') 
-router.register('alumnos', AlumnoViewSet, basename='alumno')
-router.register('materias', MateriaViewSet, basename='materia')
-router.register('inscripciones', InscripcionViewSet, basename='inscripcion')
-urlpatterns = router.urls 
+router.register(r'carreras', CarreraViewSet)
+router.register(r'alumnos', AlumnoViewSet)
+router.register(r'materias', MateriaViewSet)
+router.register(r'inscripciones', InscripcionViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
